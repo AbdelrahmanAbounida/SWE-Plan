@@ -1,0 +1,68 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "aspen",
+  "name": "Master Software Engineering Plan",
+  "colors": {
+    "primary": "#D99C33",
+    "light": "#E5B04A",
+    "dark": "#B8811F"
+  },
+  "favicon": "/logos/favicon1.ico",
+  "logo": {
+    "light": "/logos/logo.png",
+    "dark": "/logos/logo.png"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/AbdelrahmanAbounida/SWE-Plan"
+      }
+    ]
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "DSA",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": ["dsa/introduction"]
+          }
+        ]
+      },
+      {
+        "tab": "System Design",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": ["system-design/introduction"]
+          }
+        ]
+      },
+      {
+        "tab": "Languages",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": ["languages/introduction"]
+          }
+        ]
+      },
+      {
+        "tab": "Database",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": ["database/introduction"]
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/AbdelrahmanAbounida/SWE-Plan"
+    }
+  }
+}
