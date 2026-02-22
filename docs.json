@@ -111,7 +111,12 @@
       },
       {
         "tab": "Computer Science",
+
         "groups": [
+          {
+            "group": "Introduction",
+            "pages": ["cs/introduction"]
+          },
           {
             "group": "Operating Systems",
             "pages": [
@@ -130,6 +135,16 @@
               "cs/dns",
               "cs/rest-vs-grpc",
               "cs/latency-vs-throughput"
+            ]
+          },
+          {
+            "group": "Compilers & Interpreters",
+            "pages": [
+              "cs/compiler-fundamentals",
+              "cs/interpreter-fundamentals",
+              "cs/lexing-parsing",
+              "cs/ast",
+              "cs/compiler-vs-interpreter"
             ]
           }
         ]
@@ -209,6 +224,103 @@
               "cloud/gcp-fundamentals",
               "cloud/aws-basics",
               "cloud/serverless"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Frontend",
+        "groups": [
+          {
+            "group": "React",
+            "pages": [
+              "frontend/react-fundamentals",
+              "frontend/react-hooks",
+              "frontend/react-state-management",
+              "frontend/react-patterns"
+            ]
+          },
+          {
+            "group": "Next.js",
+            "pages": [
+              "frontend/nextjs-fundamentals",
+              "frontend/nextjs-routing",
+              "frontend/nextjs-data-fetching",
+              "frontend/nextjs-server-components",
+              "frontend/nextjs-deployment"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Backend",
+        "groups": [
+          {
+            "group": "Python (FastAPI)",
+            "pages": [
+              "backend/fastapi-fundamentals",
+              "backend/fastapi-routing",
+              "backend/fastapi-dependency-injection",
+              "backend/fastapi-middleware",
+              "backend/fastapi-database-integration"
+            ]
+          },
+          {
+            "group": "NestJS",
+            "pages": [
+              "backend/nestjs-fundamentals",
+              "backend/nestjs-modules",
+              "backend/nestjs-controllers-providers",
+              "backend/nestjs-middleware-guards",
+              "backend/nestjs-database-integration"
+            ]
+          },
+          {
+            "group": "oRPC",
+            "pages": [
+              "backend/orpc-fundamentals",
+              "backend/orpc-routers-procedures",
+              "backend/orpc-middleware",
+              "backend/orpc-client-integration"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Software Testing",
+        "groups": [
+          {
+            "group": "Backend Testing (pytest)",
+            "pages": [
+              "testing/pytest-fundamentals",
+              "testing/pytest-fixtures",
+              "testing/pytest-mocking",
+              "testing/pytest-api-testing"
+            ]
+          },
+          {
+            "group": "Frontend Testing (Jest)",
+            "pages": [
+              "testing/jest-fundamentals",
+              "testing/jest-component-testing",
+              "testing/jest-mocking-spying"
+            ]
+          },
+          {
+            "group": "Frontend Testing (Vitest)",
+            "pages": [
+              "testing/vitest-fundamentals",
+              "testing/vitest-component-testing",
+              "testing/vitest-mocking"
+            ]
+          },
+          {
+            "group": "E2E Testing (Playwright)",
+            "pages": [
+              "testing/playwright-fundamentals",
+              "testing/playwright-selectors",
+              "testing/playwright-assertions",
+              "testing/playwright-ci-integration"
             ]
           }
         ]

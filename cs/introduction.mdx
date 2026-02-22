@@ -1,0 +1,82 @@
+---
+title: To Know
+icon: microchip
+---
+
+## Study Plan
+
+Master the core CS fundamentals in this order:
+
+1. **Operating Systems** — Processes, threads, memory management, scheduling, and deadlocks
+2. **Networking** — TCP/UDP, HTTP/HTTPS, DNS, REST vs gRPC, latency vs throughput
+3. **Compilers & Interpreters** — Lexing, parsing, ASTs, and how code gets executed
+
+---
+
+## Key Interview Questions
+
+<AccordionGroup>
+  <Accordion title="What happens when you type google.com in the browser?">
+    DNS resolution → TCP handshake → TLS negotiation → HTTP request → server processing → response rendering. Cover each layer: DNS lookup, IP routing, TCP 3-way handshake, TLS certificates, HTTP GET, server-side handling, and browser rendering pipeline.
+  </Accordion>
+
+<Accordion title="How does memory management work in an OS?">
+  Cover virtual memory, paging, segmentation, page tables, TLB caches, and how
+  the OS maps virtual addresses to physical memory. Discuss page faults,
+  swapping, and memory allocation strategies (first-fit, best-fit, buddy
+  system).
+</Accordion>
+
+<Accordion title="Explain multithreading vs multiprocessing.">
+  Threads share the same address space within a process, making communication
+  fast but requiring synchronization (mutexes, semaphores). Processes have
+  isolated memory, making them safer but with higher IPC overhead. Discuss use
+  cases for each and the GIL in Python.
+</Accordion>
+
+<Accordion title="What is a deadlock and how do you prevent it?">
+  A deadlock occurs when processes hold resources while waiting for others,
+  forming a circular dependency. Four conditions: mutual exclusion,
+  hold-and-wait, no preemption, circular wait. Prevention strategies include
+  resource ordering, timeout-based detection, and lock hierarchies.
+</Accordion>
+
+<Accordion title="Explain TCP vs UDP and when to use each.">
+  TCP is connection-oriented with guaranteed delivery, ordering, and flow
+  control — ideal for web, file transfer, and email. UDP is connectionless with
+  no guarantees — ideal for real-time applications like video streaming, gaming,
+  and DNS queries where speed matters more than reliability.
+</Accordion>
+
+<Accordion title="How does DNS resolution work?">
+  Browser cache → OS cache → recursive resolver → root nameserver → TLD
+  nameserver → authoritative nameserver. Discuss DNS record types (A, AAAA,
+  CNAME, MX), TTL, DNS caching layers, and how CDNs use DNS for geographic
+  routing.
+</Accordion>
+
+<Accordion title="What is the difference between a process and a thread?">
+  A process is an independent execution unit with its own memory space. A thread
+  is a lightweight unit within a process sharing the same memory. Context
+  switching between threads is cheaper than between processes. Discuss thread
+  safety, race conditions, and synchronization primitives.
+</Accordion>
+
+<Accordion title="How does a compiler differ from an interpreter?">
+  A compiler translates the entire source code to machine code before execution
+  (C, Rust, Go). An interpreter executes code line-by-line at runtime (Python,
+  Ruby). Discuss hybrid approaches like JIT compilation (Java, JavaScript V8),
+  and trade-offs in performance vs development speed.
+</Accordion>
+
+<Accordion title="Explain how virtual memory works.">
+  Virtual memory gives each process the illusion of a large, contiguous address
+  space. The OS uses page tables to map virtual pages to physical frames. When a
+  page isn't in RAM, a page fault triggers loading from disk. Discuss TLB, page
+  replacement algorithms (LRU, FIFO), and thrashing.
+</Accordion>
+
+  <Accordion title="What happens during a context switch?">
+    The OS saves the current process/thread state (registers, program counter, stack pointer) to its PCB, selects the next process via the scheduler, and restores that process's state. Discuss the overhead involved and why minimizing context switches improves performance.
+  </Accordion>
+</AccordionGroup>
