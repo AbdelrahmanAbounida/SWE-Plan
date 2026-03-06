@@ -1,0 +1,43 @@
+---
+title: Space Complexity
+description: Analyzing memory usage of algorithms and data structures.
+---
+
+# Space Complexity
+
+Measuring and optimizing the memory footprint of algorithms alongside time complexity.
+
+## What Counts as Space?
+
+- **Input space** — memory used by the input (usually excluded from analysis)
+- **Auxiliary space** — extra memory used by the algorithm itself
+- Space complexity typically refers to **auxiliary space**
+
+## Common Space Complexities
+
+| Complexity | Example |
+|------------|---------|
+| O(1) | In-place swap, two pointers |
+| O(log n) | Recursive binary search (call stack) |
+| O(n) | Hash map, copying an array |
+| O(n²) | 2D DP table, adjacency matrix |
+
+## Space in Recursion
+
+- Each recursive call adds a frame to the **call stack**
+- Depth of recursion = stack space used
+- Tail recursion can be optimized to O(1) in some languages
+
+## Space–Time Tradeoffs
+
+- **Memoization** — use extra space to avoid recomputation
+- **Hash maps** — O(n) space to achieve O(1) lookups
+- **Sorting in-place** — save space but may increase code complexity
+- **Bit manipulation** — use bits instead of arrays for boolean flags
+
+## Tips for Interviews
+
+- Always mention space complexity alongside time complexity
+- In-place algorithms are preferred when space is constrained
+- Iterative solutions often use less space than recursive ones
+- Consider whether the problem allows modifying the input array

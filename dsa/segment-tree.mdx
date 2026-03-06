@@ -1,0 +1,68 @@
+---
+title: Segment Tree & Fenwick Tree
+description: Range query data structures for efficient interval operations.
+---
+
+# Segment Tree & Fenwick Tree (BIT)
+
+Advanced data structures for answering range queries and performing point/range updates efficiently.
+
+## Segment Tree
+
+A binary tree where each node stores aggregate information (sum, min, max) for a range of the array.
+
+### Operations
+
+| Operation | Time Complexity |
+|-----------|----------------|
+| Build | O(n) |
+| Point Update | O(log n) |
+| Range Query | O(log n) |
+| Range Update (lazy) | O(log n) |
+
+### Key Concepts
+
+- **Build** — recursively construct the tree from the array
+- **Query** — traverse the tree, combining results from relevant segments
+- **Update** — update a leaf and propagate changes upward
+- **Lazy Propagation** — defer updates to children until needed (for range updates)
+
+### When to Use Segment Tree
+
+- Range sum / min / max queries with updates
+- Count of elements in a range
+- Problems requiring both query and update on intervals
+
+## Fenwick Tree (Binary Indexed Tree)
+
+A simpler, more space-efficient alternative for **prefix sum queries** and **point updates**.
+
+### Operations
+
+| Operation | Time Complexity |
+|-----------|----------------|
+| Build | O(n log n) |
+| Point Update | O(log n) |
+| Prefix Query | O(log n) |
+| Range Query | O(log n) |
+
+### Key Idea
+
+Uses the binary representation of indices to determine parent-child relationships. The lowest set bit determines the range each node covers.
+
+## Comparison
+
+| Feature | Segment Tree | Fenwick Tree |
+|---------|-------------|--------------|
+| Range updates | Yes (with lazy prop) | Limited |
+| Implementation | More complex | Simpler |
+| Space | 4n | n |
+| Flexibility | More versatile | Prefix-based only |
+
+## Classic Problems
+
+- Range Sum Query (mutable)
+- Count of Smaller Numbers After Self
+- Reverse Pairs
+- Rectangle Area (2D segment tree)
+- Interval scheduling with queries

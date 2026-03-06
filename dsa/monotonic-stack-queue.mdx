@@ -1,0 +1,79 @@
+---
+title: Monotonic Stack & Queue
+description: Stack and queue variants that maintain sorted order for efficient range queries.
+---
+
+# Monotonic Stack & Queue
+
+Specialized data structures that maintain elements in a sorted (monotonic) order, enabling efficient solutions for "next greater/smaller" problems.
+
+## Monotonic Stack
+
+A stack where elements are kept in strictly increasing or decreasing order.
+
+### How It Works
+
+- When pushing a new element, pop all elements that violate the monotonic property
+- The popped elements have "found" their answer (the current element)
+
+### Types
+
+- **Monotonically Increasing** — finds **next smaller** element
+- **Monotonically Decreasing** — finds **next greater** element
+
+### Template (Next Greater Element)
+
+```python
+def next_greater(nums):
+    n = len(nums)
+    result = [-1] * n
+    stack = []  # stores indices
+    for i in range(n):
+        while stack and nums[stack[-1]] < nums[i]:
+            result[stack.pop()] = nums[i]
+        stack.append(i)
+    return result
+```
+
+### Time & Space: O(n) each
+
+## Monotonic Deque (Queue)
+
+A double-ended queue maintaining monotonic order — used for **sliding window min/max** problems.
+
+### Template (Sliding Window Maximum)
+
+```python
+from collections import deque
+
+def max_sliding_window(nums, k):
+    dq = deque()  # stores indices, decreasing order of values
+    result = []
+    for i in range(len(nums)):
+        while dq and dq[0] < i - k + 1:
+            dq.popleft()
+        while dq and nums[dq[-1]] < nums[i]:
+            dq.pop()
+        dq.append(i)
+        if i >= k - 1:
+            result.append(nums[dq[0]])
+    return result
+```
+
+## Classic Problems
+
+- Next Greater Element I, II
+- Daily Temperatures
+- Largest Rectangle in Histogram
+- Trapping Rain Water
+- Sliding Window Maximum
+- Shortest Subarray with Sum at Least K
+- Stock Span Problem
+- Remove K Digits
+
+## When to Use
+
+- "Next greater/smaller element" patterns
+- Sliding window min/max queries
+- Histogram-based area problems
+- Problems requiring efficient range extrema

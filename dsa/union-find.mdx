@@ -1,0 +1,65 @@
+---
+title: Union-Find (Disjoint Set Union)
+description: Disjoint Set Union data structure for graph connectivity and grouping problems.
+---
+
+# Union-Find (Disjoint Set Union)
+
+A data structure that tracks a set of elements partitioned into disjoint (non-overlapping) subsets.
+
+## Core Operations
+
+| Operation | Time Complexity |
+|-----------|----------------|
+| Find | O(α(n)) ≈ O(1) |
+| Union | O(α(n)) ≈ O(1) |
+
+Where **α** is the inverse Ackermann function — effectively constant.
+
+## Optimizations
+
+- **Path Compression** — during `find`, point every node directly to the root
+- **Union by Rank/Size** — attach the smaller tree under the root of the larger tree
+
+## Implementation
+
+```python
+class UnionFind:
+    def __init__(self, n):
+        self.parent = list(range(n))
+        self.rank = [0] * n
+
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])  # path compression
+        return self.parent[x]
+
+    def union(self, x, y):
+        rx, ry = self.find(x), self.find(y)
+        if rx == ry:
+            return False
+        if self.rank[rx] < self.rank[ry]:
+            rx, ry = ry, rx
+        self.parent[ry] = rx
+        if self.rank[rx] == self.rank[ry]:
+            self.rank[rx] += 1
+        return True
+```
+
+## Classic Problems
+
+- Number of Connected Components
+- Redundant Connection (cycle detection)
+- Accounts Merge
+- Longest Consecutive Sequence
+- Number of Islands (alternative to BFS/DFS)
+- Kruskal's Minimum Spanning Tree
+- Satisfiability of Equality Equations
+
+## When to Use
+
+- Dynamic connectivity — are two nodes in the same group?
+- Cycle detection in undirected graphs
+- Merging groups or components incrementally
+- Kruskal's MST algorithm
+- Problems where you need to track connected components over time

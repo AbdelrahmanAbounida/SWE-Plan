@@ -1,0 +1,89 @@
+---
+title: Top-K Elements
+description: Patterns for finding the K largest, smallest, or most frequent elements efficiently.
+---
+
+# Top-K Elements
+
+A recurring pattern in interviews — finding the K largest, smallest, or most frequent elements.
+
+## Approaches
+
+### 1. Sorting
+
+Sort the collection and pick the first/last K elements.
+
+- Time: O(n log n)
+- Simple but not optimal
+
+### 2. Min/Max Heap of Size K
+
+Maintain a heap of size K:
+- **K largest** → use a **min-heap** of size K (pop smallest when size exceeds K)
+- **K smallest** → use a **max-heap** of size K
+
+```python
+import heapq
+
+def top_k_largest(nums, k):
+    return heapq.nlargest(k, nums)
+
+# Manual approach with min-heap
+def top_k_largest_heap(nums, k):
+    heap = []
+    for num in nums:
+        heapq.heappush(heap, num)
+        if len(heap) > k:
+            heapq.heappop(heap)
+    return heap
+```
+
+- Time: O(n log k)
+- Space: O(k)
+
+### 3. Quickselect
+
+Partition-based selection (like quicksort but only recurse on one side).
+
+- Time: O(n) average, O(n²) worst
+- Space: O(1)
+- Best when you need the k-th element, not all top K sorted
+
+### 4. Bucket Sort (for frequency problems)
+
+When finding top K by frequency, bucket sort avoids heap overhead:
+
+```python
+def top_k_frequent(nums, k):
+    count = Counter(nums)
+    buckets = [[] for _ in range(len(nums) + 1)]
+    for num, freq in count.items():
+        buckets[freq].append(num)
+    result = []
+    for i in range(len(buckets) - 1, -1, -1):
+        result.extend(buckets[i])
+        if len(result) >= k:
+            return result[:k]
+```
+
+- Time: O(n)
+
+## Which Approach to Use
+
+| Scenario | Best Approach | Time |
+|----------|--------------|------|
+| K largest/smallest | Min/Max heap | O(n log k) |
+| K-th element only | Quickselect | O(n) avg |
+| K most frequent | Bucket sort | O(n) |
+| Stream of data | Heap of size K | O(n log k) |
+
+## Classic Problems
+
+- Kth Largest Element in an Array
+- Top K Frequent Elements
+- Top K Frequent Words
+- K Closest Points to Origin
+- Find K Pairs with Smallest Sums
+- Sort Characters by Frequency
+- Reorganize String
+- K Closest Elements in Sorted Array

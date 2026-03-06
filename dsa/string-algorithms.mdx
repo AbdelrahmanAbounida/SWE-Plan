@@ -1,0 +1,133 @@
+---
+title: String Algorithms
+description: Pattern matching and string processing algorithms — KMP, Rabin-Karp, Z-algorithm, and more.
+---
+
+# String Algorithms
+
+Efficient algorithms for string matching, searching, and processing beyond brute force.
+
+## KMP (Knuth-Morris-Pratt)
+
+Pattern matching using a **failure function** (prefix table) to avoid redundant comparisons.
+
+### Key Idea
+
+Precompute the longest proper prefix which is also a suffix (LPS array) for the pattern. On mismatch, use LPS to skip characters.
+
+```python
+def kmp(text, pattern):
+    lps = compute_lps(pattern)
+    i = j = 0
+    results = []
+    while i < len(text):
+        if text[i] == pattern[j]:
+            i += 1
+            j += 1
+        if j == len(pattern):
+            results.append(i - j)
+            j = lps[j - 1]
+        elif i < len(text) and text[i] != pattern[j]:
+            if j != 0:
+                j = lps[j - 1]
+            else:
+                i += 1
+    return results
+
+def compute_lps(pattern):
+    lps = [0] * len(pattern)
+    length = 0
+    i = 1
+    while i < len(pattern):
+        if pattern[i] == pattern[length]:
+            length += 1
+            lps[i] = length
+            i += 1
+        elif length != 0:
+            length = lps[length - 1]
+        else:
+            lps[i] = 0
+            i += 1
+    return lps
+```
+
+- Time: O(n + m), Space: O(m)
+
+## Rabin-Karp
+
+Uses **rolling hash** to compare pattern with substrings of text.
+
+### Key Idea
+
+- Compute hash of pattern and hash of each window of text
+- On hash match, verify character by character (to handle collisions)
+
+```python
+def rabin_karp(text, pattern, base=256, mod=10**9+7):
+    n, m = len(text), len(pattern)
+    p_hash = t_hash = 0
+    h = pow(base, m - 1, mod)
+
+    for i in range(m):
+        p_hash = (p_hash * base + ord(pattern[i])) % mod
+        t_hash = (t_hash * base + ord(text[i])) % mod
+
+    results = []
+    for i in range(n - m + 1):
+        if p_hash == t_hash and text[i:i+m] == pattern:
+            results.append(i)
+        if i < n - m:
+            t_hash = (t_hash - ord(text[i]) * h) * base + ord(text[i + m])
+            t_hash %= mod
+    return results
+```
+
+- Time: O(n + m) average, O(n × m) worst case
+- Good for **multiple pattern matching**
+
+## Z-Algorithm
+
+Builds a Z-array where `Z[i]` = length of the longest substring starting from `i` that matches a prefix.
+
+- Concatenate: `pattern + "$" + text`, then build Z-array
+- Time: O(n + m)
+- Simpler to implement than KMP for some problems
+
+## Manacher's Algorithm
+
+Finds the **longest palindromic substring** in O(n) time.
+
+### Key Idea
+
+- Transform string (`"abc"` → `"#a#b#c#"`) to handle even-length palindromes
+- Maintain a center and right boundary of the rightmost palindrome
+- Use previously computed values to skip work
+
+- Time: O(n), Space: O(n)
+
+## Rolling Hash
+
+A hash function that can be updated in O(1) when the window slides.
+
+- Used in Rabin-Karp
+- Useful for substring comparison, duplicate detection
+- **Polynomial hash**: `hash = s[0]*b^(n-1) + s[1]*b^(n-2) + ... + s[n-1]`
+
+## Comparison
+
+| Algorithm | Time | Best For |
+|-----------|------|----------|
+| KMP | O(n + m) | Single pattern matching |
+| Rabin-Karp | O(n + m) avg | Multiple pattern matching |
+| Z-Algorithm | O(n + m) | Pattern matching, prefix problems |
+| Manacher's | O(n) | Longest palindromic substring |
+
+## Classic Problems
+
+- Implement strStr() / Find the Index
+- Repeated Substring Pattern
+- Shortest Palindrome (KMP)
+- Longest Happy Prefix
+- Longest Palindromic Substring (Manacher's)
+- Distinct Substrings (rolling hash)
+- Minimum Window Substring (sliding window, not string algo per se)

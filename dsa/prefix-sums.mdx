@@ -1,0 +1,72 @@
+---
+title: Prefix Sums
+description: Precomputing cumulative sums for efficient range queries.
+---
+
+# Prefix Sums
+
+A technique of precomputing cumulative sums to answer range sum queries in O(1) time.
+
+## Core Idea
+
+Given an array `nums`, build a prefix sum array where:
+
+```
+prefix[0] = 0
+prefix[i] = nums[0] + nums[1] + ... + nums[i-1]
+```
+
+**Range sum** from index `l` to `r`:
+```
+sum(l, r) = prefix[r + 1] - prefix[l]
+```
+
+## Complexity
+
+| Operation | Time |
+|-----------|------|
+| Build prefix array | O(n) |
+| Range sum query | O(1) |
+| Space | O(n) |
+
+## Variations
+
+### 1D Prefix Sum
+
+Standard cumulative sum for range queries on arrays.
+
+### 2D Prefix Sum
+
+For submatrix sum queries. Uses inclusion-exclusion:
+
+```
+prefix[i][j] = matrix[i-1][j-1]
+             + prefix[i-1][j]
+             + prefix[i][j-1]
+             - prefix[i-1][j-1]
+```
+
+### Prefix XOR
+
+Same idea but with XOR — useful for finding subarrays with target XOR.
+
+### Difference Array
+
+The inverse of prefix sums — used for efficient range updates:
+- Increment range `[l, r]` by `val`: `diff[l] += val`, `diff[r+1] -= val`
+- Reconstruct with prefix sum
+
+## Classic Problems
+
+- Range Sum Query (Immutable)
+- Subarray Sum Equals K (prefix sum + hash map)
+- Contiguous Array (prefix sum with transformation)
+- Product of Array Except Self
+- Range Sum Query 2D (Immutable)
+- Count Number of Nice Subarrays
+
+## Pairs Well With
+
+- **Sliding Window** — when window conditions involve sums
+- **Hash Maps** — to find subarrays with a target sum in O(n)
+- **Binary Search** — on prefix sums for threshold problems

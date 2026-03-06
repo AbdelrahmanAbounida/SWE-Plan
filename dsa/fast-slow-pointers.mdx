@@ -1,0 +1,77 @@
+---
+title: Fast & Slow Pointers
+description: Floyd's cycle detection and the tortoise-and-hare technique.
+---
+
+# Fast & Slow Pointers
+
+A two-pointer technique where one pointer moves faster than the other, primarily used for cycle detection and finding middle elements.
+
+## Floyd's Cycle Detection
+
+Also known as the **tortoise and hare** algorithm:
+
+- **Slow pointer** moves 1 step at a time
+- **Fast pointer** moves 2 steps at a time
+- If there's a cycle, they **will meet**
+- If fast reaches the end, there's **no cycle**
+
+### Finding the Cycle Start
+
+After detecting a cycle (slow and fast meet):
+1. Reset one pointer to the head
+2. Move both pointers one step at a time
+3. They meet at the **cycle start**
+
+```python
+def detect_cycle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            # Find cycle start
+            slow = head
+            while slow != fast:
+                slow = slow.next
+                fast = fast.next
+            return slow  # cycle start
+    return None  # no cycle
+```
+
+## Finding the Middle
+
+Use fast/slow to find the middle of a linked list in one pass:
+
+```python
+def find_middle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    return slow  # middle node
+```
+
+## Classic Problems
+
+- Linked List Cycle I & II
+- Find the Duplicate Number (array as linked list)
+- Middle of the Linked List
+- Palindrome Linked List (find middle + reverse second half)
+- Happy Number (cycle in digit-square sequence)
+- Reorder List
+
+## How It Differs from Two Pointers
+
+| Aspect | Two Pointers | Fast & Slow |
+|--------|-------------|-------------|
+| Speed | Same speed, different directions | Different speeds, same direction |
+| Use case | Sorted arrays, pair finding | Cycles, middle finding |
+| Data structure | Arrays, strings | Linked lists, sequences |
+
+## When to Use
+
+- Detecting cycles in linked lists or sequences
+- Finding the middle element in one pass
+- Problems where the structure "loops back" (e.g., Happy Number)
+- Linked list problems requiring O(1) space

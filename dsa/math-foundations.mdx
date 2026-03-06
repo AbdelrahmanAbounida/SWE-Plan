@@ -1,0 +1,159 @@
+---
+title: Mathematics for DSA
+description: Essential math concepts for algorithm problems — GCD, primes, modular arithmetic, and combinatorics.
+---
+
+# Mathematics for DSA
+
+Mathematical foundations that frequently appear in coding interviews and competitive programming.
+
+## GCD & LCM
+
+### Greatest Common Divisor (Euclidean Algorithm)
+
+```python
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+def lcm(a, b):
+    return a * b // gcd(a, b)
+```
+
+- Time: O(log(min(a, b)))
+- **Extended Euclidean**: finds `x, y` such that `ax + by = gcd(a, b)`
+
+### Key Properties
+
+- `gcd(a, 0) = a`
+- `gcd(a, b) = gcd(b, a % b)`
+- `lcm(a, b) = a * b / gcd(a, b)`
+
+## Prime Numbers & Sieve of Eratosthenes
+
+### Primality Check
+
+```python
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+```
+
+Time: O(√n)
+
+### Sieve of Eratosthenes
+
+Find all primes up to `n`:
+
+```python
+def sieve(n):
+    is_prime = [True] * (n + 1)
+    is_prime[0] = is_prime[1] = False
+    for i in range(2, int(n**0.5) + 1):
+        if is_prime[i]:
+            for j in range(i * i, n + 1, i):
+                is_prime[j] = False
+    return [i for i in range(n + 1) if is_prime[i]]
+```
+
+Time: O(n log log n), Space: O(n)
+
+### Prime Factorization
+
+```python
+def factorize(n):
+    factors = []
+    d = 2
+    while d * d <= n:
+        while n % d == 0:
+            factors.append(d)
+            n //= d
+        d += 1
+    if n > 1:
+        factors.append(n)
+    return factors
+```
+
+## Modular Arithmetic
+
+Essential for problems with "answer mod 10⁹+7".
+
+### Key Rules
+
+- `(a + b) % m = ((a % m) + (b % m)) % m`
+- `(a * b) % m = ((a % m) * (b % m)) % m`
+- `(a - b) % m = ((a % m) - (b % m) + m) % m`
+- Division requires **modular inverse**
+
+### Modular Exponentiation (Fast Power)
+
+```python
+def mod_pow(base, exp, mod):
+    result = 1
+    base %= mod
+    while exp > 0:
+        if exp % 2 == 1:
+            result = result * base % mod
+        exp //= 2
+        base = base * base % mod
+    return result
+```
+
+Time: O(log exp)
+
+### Modular Inverse
+
+- `a⁻¹ mod m = mod_pow(a, m - 2, m)` (when m is prime, by Fermat's little theorem)
+
+## Combinatorics
+
+### Basics
+
+- **Permutations**: `P(n, r) = n! / (n-r)!`
+- **Combinations**: `C(n, r) = n! / (r! * (n-r)!)`
+- **Pascal's Triangle**: `C(n, r) = C(n-1, r-1) + C(n-1, r)`
+
+### Computing nCr mod p
+
+Precompute factorials and inverse factorials:
+
+```python
+MOD = 10**9 + 7
+
+def precompute(n):
+    fact = [1] * (n + 1)
+    for i in range(1, n + 1):
+        fact[i] = fact[i-1] * i % MOD
+    inv_fact = [1] * (n + 1)
+    inv_fact[n] = mod_pow(fact[n], MOD - 2, MOD)
+    for i in range(n - 1, -1, -1):
+        inv_fact[i] = inv_fact[i+1] * (i+1) % MOD
+    return fact, inv_fact
+
+def nCr(n, r, fact, inv_fact):
+    if r < 0 or r > n:
+        return 0
+    return fact[n] * inv_fact[r] % MOD * inv_fact[n-r] % MOD
+```
+
+## Probability Basics
+
+- Useful for **randomized algorithms** (e.g., reservoir sampling, random pivots)
+- **Expected value**: linearity of expectation
+- **Monte Carlo vs Las Vegas** algorithms
+
+## Classic Problems
+
+- Count Primes
+- Pow(x, n)
+- Happy Number
+- GCD of Strings
+- Unique Paths (combinatorics solution)
+- Catalan Numbers
+- Pascal's Triangle
+- Josephus Problem

@@ -1,0 +1,59 @@
+---
+title: Divide and Conquer
+description: Breaking problems into subproblems, solving recursively, and combining results.
+---
+
+# Divide and Conquer
+
+A paradigm that breaks a problem into smaller subproblems, solves them independently, and combines their results.
+
+## The Three Steps
+
+1. **Divide** — split the problem into smaller subproblems
+2. **Conquer** — solve each subproblem recursively
+3. **Combine** — merge the results of subproblems into the final answer
+
+## Key Algorithms
+
+### Merge Sort
+
+- Divide array in half → sort each half → merge sorted halves
+- Time: O(n log n), Space: O(n)
+- **Stable** sort
+
+### Quick Sort
+
+- Pick a pivot → partition around it → sort each partition
+- Time: O(n log n) average, O(n²) worst case, Space: O(log n)
+- **In-place** (no extra array needed)
+
+### Binary Search
+
+- Divide search space in half each step
+- Time: O(log n)
+
+## Master Theorem
+
+For recurrences of the form `T(n) = aT(n/b) + O(n^d)`:
+
+| Condition | Complexity |
+|-----------|------------|
+| d > log_b(a) | O(n^d) |
+| d = log_b(a) | O(n^d log n) |
+| d < log_b(a) | O(n^(log_b(a))) |
+
+## Classic Problems
+
+- Merge Sort / Quick Sort implementation
+- Count Inversions (modified merge sort)
+- Closest Pair of Points
+- Maximum Subarray (Kadane's is better, but D&C approach is instructive)
+- Median of Two Sorted Arrays
+- Pow(x, n) — fast exponentiation
+- K-th Largest Element (quick select)
+
+## When to Use
+
+- Problem can be broken into independent subproblems of the same type
+- Combining results is efficient
+- Often leads to O(n log n) solutions

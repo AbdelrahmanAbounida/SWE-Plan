@@ -1,0 +1,81 @@
+---
+title: Interval Problems
+description: Techniques for merging, scheduling, and querying overlapping intervals.
+---
+
+# Interval Problems
+
+A common pattern in interviews involving ranges represented as `[start, end]` pairs.
+
+## Key Technique: Sort First
+
+Almost every interval problem starts with **sorting by start time** (or sometimes end time).
+
+## Core Patterns
+
+### 1. Merge Intervals
+
+Combine overlapping intervals:
+
+```python
+def merge(intervals):
+    intervals.sort()
+    merged = [intervals[0]]
+    for start, end in intervals[1:]:
+        if start <= merged[-1][1]:
+            merged[-1][1] = max(merged[-1][1], end)
+        else:
+            merged.append([start, end])
+    return merged
+```
+
+### 2. Insert Interval
+
+Insert a new interval and merge if necessary — handle three cases: before, overlapping, after.
+
+### 3. Interval Intersection
+
+Find common overlaps between two sorted lists of intervals using two pointers.
+
+### 4. Meeting Rooms (Overlap Check)
+
+- **Can attend all?** — sort by start, check for any overlap
+- **Min rooms needed?** — use a min-heap or sweep line on start/end events
+
+### 5. Sweep Line
+
+Process events (start/end) in sorted order to track active intervals:
+
+```python
+events = []
+for start, end in intervals:
+    events.append((start, 1))   # interval starts
+    events.append((end, -1))    # interval ends
+events.sort()
+```
+
+## Complexity
+
+| Pattern | Time | Space |
+|---------|------|-------|
+| Merge Intervals | O(n log n) | O(n) |
+| Meeting Rooms II | O(n log n) | O(n) |
+| Sweep Line | O(n log n) | O(n) |
+
+## Classic Problems
+
+- Merge Intervals
+- Insert Interval
+- Non-overlapping Intervals (min removals)
+- Meeting Rooms I & II
+- Minimum Number of Arrows to Burst Balloons
+- Interval List Intersections
+- Employee Free Time
+- My Calendar I, II, III
+
+## When to Use
+
+- Problems involving time ranges, schedules, or bookings
+- Overlapping or conflicting range detection
+- Resource allocation (rooms, CPUs, etc.)
+- Any problem with `[start, end]` pair inputs

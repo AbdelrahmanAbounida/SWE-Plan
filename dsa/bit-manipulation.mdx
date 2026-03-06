@@ -1,0 +1,51 @@
+---
+title: Bit Manipulation
+description: Bitwise operations, common tricks, and interview patterns.
+---
+
+# Bit Manipulation
+
+Understanding how numbers are represented in binary and leveraging bitwise operations for efficient problem solving.
+
+## Core Bitwise Operators
+
+| Operator | Symbol | Description |
+|----------|--------|-------------|
+| AND | `&` | Both bits must be 1 |
+| OR | `\|` | At least one bit must be 1 |
+| XOR | `^` | Bits must differ |
+| NOT | `~` | Flip all bits |
+| Left Shift | `<<` | Shift bits left (multiply by 2) |
+| Right Shift | `>>` | Shift bits right (divide by 2) |
+
+## Common Tricks
+
+- **Check if number is even/odd:** `n & 1` (0 = even, 1 = odd)
+- **Check if power of 2:** `n & (n - 1) == 0`
+- **Toggle a bit at position i:** `n ^ (1 << i)`
+- **Set a bit at position i:** `n | (1 << i)`
+- **Clear a bit at position i:** `n & ~(1 << i)`
+- **Get lowest set bit:** `n & (-n)`
+- **Clear lowest set bit:** `n & (n - 1)`
+
+## XOR Properties
+
+- `a ^ a = 0` (self-cancellation)
+- `a ^ 0 = a` (identity)
+- XOR is commutative and associative
+
+## Classic Problems
+
+- Single Number (find the unique element)
+- Counting Bits
+- Reverse Bits
+- Hamming Distance
+- Subsets generation using bitmask
+- Missing Number (`XOR 0..n` with array)
+
+## When to Use
+
+- Problems involving toggling, swapping, or checking individual bits
+- Subset enumeration (bitmask DP)
+- Finding unique/missing elements efficiently
+- Optimizing space when storing boolean flags

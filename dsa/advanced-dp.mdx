@@ -1,0 +1,127 @@
+---
+title: Advanced Dynamic Programming
+description: DP on trees, graphs, digits, and bitmasks — advanced patterns for hard interview problems.
+---
+
+# Advanced Dynamic Programming
+
+Beyond basic 1D/2D DP — patterns that appear in harder interview and competitive programming problems.
+
+## DP on Trees
+
+Process tree structures bottom-up or top-down using DFS.
+
+### Pattern
+
+```python
+def dfs(node, parent, tree):
+    dp[node] = base_case
+    for child in tree[node]:
+        if child != parent:
+            dfs(child, node, tree)
+            dp[node] = combine(dp[node], dp[child])
+```
+
+### Classic Problems
+
+- Binary Tree Maximum Path Sum
+- House Robber III
+- Diameter of Binary Tree
+- Longest Path in a Tree
+- Count Nodes in Complete Tree with property X
+
+## DP on Graphs
+
+DP over DAGs using topological order, or shortest path problems with state.
+
+### Key Insight
+
+- If the graph is a **DAG**, topological sort gives a valid DP ordering
+- Otherwise, look for ways to define states that form a DAG (e.g., adding constraints)
+
+### Classic Problems
+
+- Longest Path in a DAG
+- Cheapest Flights Within K Stops
+- Shortest Path with constraints
+- Number of ways to reach destination
+
+## Digit DP
+
+Count numbers in range `[L, R]` with specific digit properties.
+
+### Pattern
+
+State: `(position, tight, started, ...custom_state)`
+
+- **tight**: are we still bounded by the upper limit?
+- **started**: have we placed a non-zero digit yet? (for leading zeros)
+
+```python
+from functools import lru_cache
+
+def count(num_str):
+    @lru_cache(maxsize=None)
+    def dp(pos, tight, started, state):
+        if pos == len(num_str):
+            return 1 if started else 0
+        limit = int(num_str[pos]) if tight else 9
+        result = 0
+        for d in range(0, limit + 1):
+            result += dp(
+                pos + 1,
+                tight and d == limit,
+                started or d > 0,
+                next_state(state, d)
+            )
+        return result
+    return dp(0, True, False, initial_state)
+```
+
+### Classic Problems
+
+- Numbers At Most N Given Digit Set
+- Count Numbers with Unique Digits
+- Numbers With Repeated Digits
+- Non-negative Integers without Consecutive Ones
+
+## Bitmask DP
+
+Use a bitmask to represent subsets of a small set (n ≤ 20).
+
+### Key Idea
+
+State includes a bitmask representing which elements have been used/visited.
+
+```python
+# Example: Travelling Salesman Problem
+@lru_cache(maxsize=None)
+def dp(mask, pos):
+    if mask == (1 << n) - 1:  # all cities visited
+        return dist[pos][0]
+    result = float('inf')
+    for next_city in range(n):
+        if not (mask & (1 << next_city)):
+            result = min(result, dist[pos][next_city] + dp(mask | (1 << next_city), next_city))
+    return result
+```
+
+- Time: O(2^n × n), Space: O(2^n × n)
+- **n must be small** (typically ≤ 20)
+
+### Classic Problems
+
+- Travelling Salesman Problem
+- Partition to K Equal Sum Subsets
+- Shortest Path Visiting All Nodes
+- Can I Win
+- Minimum Cost to Visit Every Node in a Graph
+
+## When to Use Which
+
+| Pattern | Signal |
+|---------|--------|
+| DP on Trees | Tree structure, bottom-up aggregation |
+| DP on Graphs | DAG or shortest path with states |
+| Digit DP | "Count numbers in range with property X" |
+| Bitmask DP | Small set (n ≤ 20), subset enumeration, TSP-like |

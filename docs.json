@@ -34,6 +34,8 @@
             "pages": [
               "dsa/introduction",
               "dsa/time-complexity",
+              "dsa/space-complexity",
+              "dsa/math-foundations",
               "dsa/recursion"
             ]
           },
@@ -46,19 +48,52 @@
               "dsa/hashmap-set",
               "dsa/trees",
               "dsa/heap",
+              "dsa/trie",
+              "dsa/union-find",
+              "dsa/segment-tree",
               "dsa/graphs"
             ]
           },
           {
-            "group": "Algorithms",
+            "group": "Core Algorithms",
             "pages": [
-              "dsa/sorting-searching",
+              "dsa/sorting",
               "dsa/binary-search",
-              "dsa/sliding-window",
               "dsa/two-pointers",
+              "dsa/sliding-window",
+              "dsa/prefix-sums",
+              "dsa/divide-and-conquer"
+            ]
+          },
+          {
+            "group": "Graph Algorithms",
+            "pages": [
+              "dsa/dfs-bfs",
+              "dsa/topological-sort",
+              "dsa/graph-algorithms"
+            ]
+          },
+          {
+            "group": "String & Bit Algorithms",
+            "pages": ["dsa/string-algorithms", "dsa/bit-manipulation"]
+          },
+          {
+            "group": "Advanced Techniques",
+            "pages": [
+              "dsa/monotonic-stack-queue",
               "dsa/backtracking",
               "dsa/greedy",
-              "dsa/dynamic-programming"
+              "dsa/dynamic-programming",
+              "dsa/advanced-dp"
+            ]
+          },
+          {
+            "group": "Patterns & Problem Solving",
+            "pages": [
+              "dsa/fast-slow-pointers",
+              "dsa/binary-search-on-answer",
+              "dsa/interval-problems",
+              "dsa/top-k-elements"
             ]
           }
         ]

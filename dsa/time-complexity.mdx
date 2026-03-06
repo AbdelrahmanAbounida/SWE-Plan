@@ -1,0 +1,79 @@
+---
+title: Time Complexity
+description: Asymptotic analysis, Big-O notation, and amortized analysis for algorithm efficiency.
+---
+
+# Time Complexity
+
+How to measure and reason about algorithm efficiency.
+
+## Asymptotic Notations
+
+| Notation | Meaning | Intuition |
+|----------|---------|-----------|
+| **O(f(n))** — Big-O | Upper bound | "At most" / worst case |
+| **Ω(f(n))** — Big-Omega | Lower bound | "At least" / best case |
+| **Θ(f(n))** — Big-Theta | Tight bound | "Exactly" / average |
+| **o(f(n))** — Little-o | Strict upper bound | "Strictly less than" |
+
+In interviews, **Big-O** is used almost exclusively.
+
+## Common Complexities (Ranked)
+
+| Complexity | Name | Example |
+|------------|------|---------|
+| O(1) | Constant | Hash map lookup |
+| O(log n) | Logarithmic | Binary search |
+| O(n) | Linear | Single loop |
+| O(n log n) | Linearithmic | Merge sort |
+| O(n²) | Quadratic | Nested loops |
+| O(2^n) | Exponential | Subsets |
+| O(n!) | Factorial | Permutations |
+
+## How to Analyze
+
+1. **Identify the input size** — what is `n`?
+2. **Count dominant operations** — focus on the innermost loop / recursive calls
+3. **Drop constants and lower-order terms** — `3n² + 5n + 2` → O(n²)
+4. **Consider all inputs** — best, average, and worst case
+
+## Amortized Analysis
+
+Averages the time per operation over a **worst-case sequence** of operations (not average case).
+
+### Example: Dynamic Array (`append`)
+
+- Most appends are O(1)
+- Occasionally the array doubles → O(n) copy
+- Over n appends, total work = n + n/2 + n/4 + ... ≈ 2n
+- **Amortized cost per append = O(1)**
+
+### Methods
+
+| Method | Idea |
+|--------|------|
+| **Aggregate** | Total cost / number of operations |
+| **Accounting** | Charge extra on cheap ops to "pay" for expensive ones |
+| **Potential** | Define a potential function that tracks stored credit |
+
+### Common Amortized O(1) Operations
+
+- `append` on dynamic arrays
+- `push`/`pop` on stacks (even with multipop)
+- Union-Find operations (with path compression + union by rank)
+- Splay tree operations
+
+## Recursive Complexity
+
+Use the **Master Theorem** (see Divide and Conquer page) or draw the recursion tree:
+
+- **Linear recursion**: `T(n) = T(n-1) + O(1)` → O(n)
+- **Binary recursion**: `T(n) = 2T(n/2) + O(n)` → O(n log n)
+- **Exponential recursion**: `T(n) = 2T(n-1) + O(1)` → O(2^n)
+
+## Tips for Interviews
+
+- Always state time AND space complexity
+- If unsure, trace through a small example and count operations
+- Know the complexities of built-in operations (sort, search, insert) for your language
+- Mention amortized analysis when relevant (hash maps, dynamic arrays)

@@ -1,0 +1,71 @@
+---
+title: Binary Search on Answer
+description: Using binary search to find the optimal value when the search space is monotonic.
+---
+
+# Binary Search on Answer
+
+A powerful pattern where you binary search on the **answer** itself rather than on an array index.
+
+## Core Idea
+
+When a problem asks "find the minimum/maximum value such that some condition holds," and the condition is **monotonic** (once true, stays true), binary search the answer space.
+
+### Template
+
+```python
+def binary_search_on_answer(lo, hi):
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if feasible(mid):
+            hi = mid        # try smaller (for minimum)
+        else:
+            lo = mid + 1
+    return lo
+
+def feasible(value):
+    # Check if 'value' satisfies the condition
+    # This is the problem-specific part
+    pass
+```
+
+### For Maximum
+
+```python
+def binary_search_max(lo, hi):
+    while lo < hi:
+        mid = (lo + hi + 1) // 2  # upper mid to avoid infinite loop
+        if feasible(mid):
+            lo = mid
+        else:
+            hi = mid - 1
+    return lo
+```
+
+## How to Recognize
+
+- "Minimize the maximum" or "maximize the minimum"
+- "Find the smallest X such that..."
+- "Is it possible to achieve X?" can be answered in O(n) or O(n log n)
+- The answer has a clear range `[lo, hi]`
+
+## Classic Problems
+
+- Koko Eating Bananas (min speed)
+- Split Array Largest Sum (min max subarray sum)
+- Capacity to Ship Packages Within D Days
+- Magnetic Force Between Two Balls (max min distance)
+- Minimum Number of Days to Make m Bouquets
+- Aggressive Cows (max min distance)
+- Allocate Minimum Pages
+
+## Complexity
+
+- O(log(answer_range) × cost_of_feasibility_check)
+- Typically O(log(max_val) × n) or O(log(max_val) × n log n)
+
+## Tips
+
+- Identify the monotonic property: if X works, does X+1 also work?
+- The `feasible` function is where the real problem-solving happens
+- Often paired with greedy checks inside `feasible`

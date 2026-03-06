@@ -1,0 +1,74 @@
+---
+title: DFS & BFS
+description: Depth-First Search and Breadth-First Search traversal algorithms.
+---
+
+# Depth-First Search & Breadth-First Search
+
+The two fundamental graph/tree traversal strategies that form the backbone of countless algorithms.
+
+## DFS (Depth-First Search)
+
+Explores as far as possible along each branch before backtracking.
+
+### Approaches
+
+- **Recursive** — natural and concise, uses the call stack
+- **Iterative** — uses an explicit stack, avoids stack overflow
+
+### Time & Space
+
+| | Time | Space |
+|---|------|-------|
+| Tree | O(n) | O(h) — height of tree |
+| Graph | O(V + E) | O(V) |
+
+### Common DFS Patterns
+
+- Pre-order, in-order, post-order traversal (trees)
+- Connected components
+- Cycle detection
+- Path finding
+- Topological sort (via post-order)
+
+## BFS (Breadth-First Search)
+
+Explores all neighbors at the current depth before moving to the next level.
+
+### Implementation
+
+Uses a **queue** (FIFO). Process nodes level by level.
+
+### Time & Space
+
+| | Time | Space |
+|---|------|-------|
+| Tree | O(n) | O(w) — max width |
+| Graph | O(V + E) | O(V) |
+
+### Common BFS Patterns
+
+- Level-order traversal
+- Shortest path in unweighted graphs
+- Multi-source BFS (e.g., rotting oranges)
+- BFS on implicit graphs (word ladder, puzzle states)
+
+## DFS vs BFS
+
+| Aspect | DFS | BFS |
+|--------|-----|-----|
+| Data structure | Stack | Queue |
+| Shortest path | No (unweighted) | Yes (unweighted) |
+| Memory | O(h) or O(V) | O(w) or O(V) |
+| Best for | Exhaustive search, backtracking | Shortest path, level-order |
+
+## Classic Problems
+
+- Number of Islands
+- Clone Graph
+- Word Ladder (BFS)
+- Course Schedule (DFS cycle detection)
+- Binary Tree Level Order Traversal (BFS)
+- Pacific Atlantic Water Flow
+- Surrounded Regions
+- Shortest Path in Binary Matrix (BFS)

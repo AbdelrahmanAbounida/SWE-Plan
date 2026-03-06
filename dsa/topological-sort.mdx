@@ -1,0 +1,79 @@
+---
+title: Topological Sort
+description: Ordering vertices in a directed acyclic graph (DAG) by dependency.
+---
+
+# Topological Sort
+
+A linear ordering of vertices in a **Directed Acyclic Graph (DAG)** such that for every directed edge `u → v`, vertex `u` comes before `v`.
+
+## Two Approaches
+
+### 1. Kahn's Algorithm (BFS-based)
+
+Uses **in-degree** counting:
+
+1. Compute in-degree for every node
+2. Add all nodes with in-degree 0 to a queue
+3. Process queue: for each node, reduce in-degree of neighbors
+4. If a neighbor's in-degree becomes 0, add it to the queue
+5. If result contains all nodes → valid ordering; otherwise → cycle exists
+
+```python
+from collections import deque
+
+def topo_sort_bfs(graph, n):
+    in_degree = [0] * n
+    for u in range(n):
+        for v in graph[u]:
+            in_degree[v] += 1
+
+    queue = deque(i for i in range(n) if in_degree[i] == 0)
+    order = []
+
+    while queue:
+        node = queue.popleft()
+        order.append(node)
+        for neighbor in graph[node]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    return order if len(order) == n else []  # empty = cycle
+```
+
+### 2. DFS-based
+
+Use post-order DFS and reverse the result:
+
+1. Run DFS from each unvisited node
+2. After visiting all neighbors, add current node to stack
+3. Reverse the stack for topological order
+
+## Complexity
+
+| | Time | Space |
+|---|------|-------|
+| Kahn's (BFS) | O(V + E) | O(V) |
+| DFS-based | O(V + E) | O(V) |
+
+## Cycle Detection
+
+- **Kahn's**: if result has fewer than V nodes → cycle exists
+- **DFS**: if you encounter a node in the current recursion stack → cycle exists
+
+## Classic Problems
+
+- Course Schedule I & II
+- Alien Dictionary
+- Minimum Height Trees
+- Parallel Courses
+- Build Order (project dependencies)
+- Sequence Reconstruction
+
+## When to Use
+
+- Task scheduling with dependencies
+- Build systems and compilation order
+- Course prerequisite chains
+- Any problem involving ordering with constraints on a DAG

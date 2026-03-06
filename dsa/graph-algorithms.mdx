@@ -1,0 +1,161 @@
+---
+title: Graph Algorithms
+description: Shortest path, minimum spanning tree, and advanced graph algorithms.
+---
+
+# Graph Algorithms
+
+Essential graph algorithms for interviews — shortest paths, MST, and connectivity.
+
+## Shortest Path Algorithms
+
+### Dijkstra's Algorithm
+
+Finds shortest paths from a source to all vertices in a **weighted graph with non-negative edges**.
+
+```python
+import heapq
+
+def dijkstra(graph, src, n):
+    dist = [float('inf')] * n
+    dist[src] = 0
+    heap = [(0, src)]
+
+    while heap:
+        d, u = heapq.heappop(heap)
+        if d > dist[u]:
+            continue
+        for v, w in graph[u]:
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                heapq.heappush(heap, (dist[v], v))
+    return dist
+```
+
+- Time: O((V + E) log V) with min-heap
+- **Cannot handle negative edges**
+
+### Bellman-Ford Algorithm
+
+Handles **negative edge weights** and detects **negative cycles**.
+
+```python
+def bellman_ford(edges, n, src):
+    dist = [float('inf')] * n
+    dist[src] = 0
+
+    for _ in range(n - 1):
+        for u, v, w in edges:
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+
+    # Negative cycle detection
+    for u, v, w in edges:
+        if dist[u] + w < dist[v]:
+            return None  # negative cycle exists
+    return dist
+```
+
+- Time: O(V × E)
+
+### Floyd-Warshall Algorithm
+
+All-pairs shortest paths using DP.
+
+```python
+def floyd_warshall(dist, n):
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+    return dist
+```
+
+- Time: O(V³), Space: O(V²)
+- Works with negative edges (no negative cycles)
+
+### Comparison
+
+| Algorithm | Time | Negative Edges | Use Case |
+|-----------|------|---------------|----------|
+| Dijkstra | O((V+E) log V) | No | Single-source, non-negative |
+| Bellman-Ford | O(V × E) | Yes | Single-source, negative edges |
+| Floyd-Warshall | O(V³) | Yes (no neg cycles) | All-pairs |
+
+## Minimum Spanning Tree
+
+### Kruskal's Algorithm
+
+Greedy approach — sort edges by weight, add if no cycle (using Union-Find).
+
+```python
+def kruskal(edges, n):
+    edges.sort(key=lambda x: x[2])  # sort by weight
+    uf = UnionFind(n)
+    mst = []
+    for u, v, w in edges:
+        if uf.union(u, v):
+            mst.append((u, v, w))
+    return mst
+```
+
+- Time: O(E log E)
+- Best for **sparse graphs**
+
+### Prim's Algorithm
+
+Greedy approach — grow MST from a starting vertex using a min-heap.
+
+```python
+def prim(graph, n):
+    visited = [False] * n
+    heap = [(0, 0)]  # (weight, vertex)
+    total = 0
+
+    while heap:
+        w, u = heapq.heappop(heap)
+        if visited[u]:
+            continue
+        visited[u] = True
+        total += w
+        for v, weight in graph[u]:
+            if not visited[v]:
+                heapq.heappush(heap, (weight, v))
+    return total
+```
+
+- Time: O((V + E) log V)
+- Best for **dense graphs**
+
+## Strongly Connected Components
+
+### Kosaraju's Algorithm
+
+1. Run DFS and record finish order
+2. Transpose the graph
+3. Run DFS on transposed graph in reverse finish order
+
+- Time: O(V + E)
+
+### Tarjan's Algorithm
+
+Single-pass DFS using discovery time and low-link values.
+
+- Time: O(V + E)
+- Also finds **bridges** and **articulation points**
+
+## Bridges & Articulation Points
+
+- **Bridge**: edge whose removal disconnects the graph
+- **Articulation Point**: vertex whose removal disconnects the graph
+- Found using Tarjan's low-link values
+
+## Classic Problems
+
+- Network Delay Time (Dijkstra)
+- Cheapest Flights Within K Stops (Bellman-Ford)
+- Min Cost to Connect All Points (Prim/Kruskal)
+- Critical Connections in a Network (bridges)
+- Course Schedule (topological sort)
+- Path with Maximum Probability
+- Swim in Rising Water

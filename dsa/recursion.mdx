@@ -1,0 +1,45 @@
+---
+title: Recursion
+---
+
+I prefered to start with recursion as it has many internal details and concepts to be studies
+
+1. Low Level Foundations
+
+- Number systems (binary, hex) وإزاي الميموري بتتعامل معاهم
+- How CPU works basically - fetch, decode, execute cycle
+- Registers - إيه هي وليه موجودة
+- CPU Architecture (x86-64 specifically)
+
+2. Memory
+
+- Memory layout of a process (code, stack, heap, data segments)
+- Pointers & memory addresses
+- Static vs dynamic memory allocation
+- Virtual memory & how OS maps it
+
+3. Assembly Basics
+
+- Basic x86-64 instructions (mov, push, pop, call, ret, jmp)
+- What call and ret actually do to the instruction pointer
+- The difference between a call and a jmp
+
+4. Stack Mechanics
+
+- What a stack data structure is
+- Stack Pointer (RSP) and Base Pointer (RBP)
+- Push/pop mechanics at the hardware level
+- Stack growth direction (why it grows downward)
+
+5. Functions Under the Hood
+
+- Calling conventions (System V AMD64 ABI for Linux, or Windows x64 ABI)
+- What a stack frame / activation record is
+- How arguments get passed (registers vs stack)
+- How return values work
+
+5. OS Basics
+
+- Process memory limits
+- What a segfault actually is
+- Stack size limits and how the OS enforces them
