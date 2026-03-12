@@ -359,6 +359,111 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "DevOps",
+        "groups": [
+          {
+            "group": "Foundations",
+            "pages": [
+              "devops/introduction",
+              "devops/linux-administration",
+              "devops/terminal-knowledge",
+              "devops/bash-scripting",
+              "devops/shell-scripting",
+              "devops/networking-protocols",
+              "devops/ssl-tls-ssh"
+            ]
+          },
+          {
+            "group": "Web Servers & Proxies",
+            "pages": [
+              "devops/nginx",
+              "devops/caddy",
+              "devops/reverse-proxy-load-balancer",
+              "devops/caching-servers"
+            ]
+          },
+          {
+            "group": "Version Control & CI/CD",
+            "pages": [
+              "devops/git-workflows",
+              "devops/ci-cd-fundamentals",
+              "devops/github-actions",
+              "devops/jenkins",
+              "devops/gitlab-ci"
+            ]
+          },
+          {
+            "group": "Containers & Orchestration",
+            "pages": [
+              "devops/docker",
+              "devops/docker-compose",
+              "devops/kubernetes-fundamentals",
+              "devops/kubernetes-networking",
+              "devops/kubernetes-storage",
+              "devops/helm",
+              "devops/managed-kubernetes"
+            ]
+          },
+          {
+            "group": "Infrastructure as Code",
+            "pages": [
+              "devops/terraform",
+              "devops/pulumi",
+              "devops/cloudformation"
+            ]
+          },
+          {
+            "group": "Configuration Management",
+            "pages": ["devops/ansible", "devops/chef-puppet"]
+          },
+          {
+            "group": "Cloud Platforms & Serverless",
+            "pages": [
+              "devops/aws",
+              "devops/gcp",
+              "devops/azure",
+              "devops/serverless"
+            ]
+          },
+          {
+            "group": "GitOps & Service Mesh",
+            "pages": [
+              "devops/argocd",
+              "devops/fluxcd",
+              "devops/istio-envoy",
+              "devops/service-mesh-fundamentals"
+            ]
+          },
+          {
+            "group": "Artifact Management",
+            "pages": [
+              "devops/artifact-management",
+              "devops/container-registries"
+            ]
+          },
+          {
+            "group": "Monitoring & Observability",
+            "pages": [
+              "devops/prometheus-grafana",
+              "devops/logging",
+              "devops/application-monitoring",
+              "devops/tracing",
+              "devops/alerting"
+            ]
+          },
+          {
+            "group": "Security & Reliability",
+            "pages": [
+              "devops/devsecops",
+              "devops/secrets-management",
+              "devops/sre-fundamentals",
+              "devops/incident-management",
+              "devops/cloud-design-patterns"
+            ]
+          }
+        ]
       }
     ]
   },
