@@ -42,7 +42,8 @@
           {
             "group": "Core Data Structures",
             "pages": [
-              "dsa/arrays-strings",
+              "dsa/strings",
+              "dsa/arrays",
               "dsa/linked-list",
               "dsa/stack-queue",
               "dsa/hashmap-set",
